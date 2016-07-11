@@ -42,7 +42,7 @@ function shoot(){
 
     shotDelay = 3 + Math.random(3); //calculate a random delay before the kick
 
-    shotTime = 1.5; //currently the shot time is 1 second, but can add a random component to this
+    shotTime = 1.5; //currently the shot time is 1.5 seconds, but can add a random component to this
     ballTarget = -100 + (Math.random()*200); //calculates a horizontal ball target between -100 and +100 of the start position
 
     shotAngle = (-1 * ballTarget) / 250; //calculate a rough shot offset ratio we can use for the rebound if the goalie catches it
