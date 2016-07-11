@@ -7,11 +7,10 @@ var goalieOffset; //set to either -1 or +1 when the goalie jumps to tween left o
 var shotDelay; //slightly random wait for the kick
 var shotAngle; //use as a reference for the angle of the shot to calculate rebound angle
 var goaliePos = 0; //set the goalie original position to 0 so we have a value to check against if the goalie doesn't jump
-var saveCounter = 0;//amount of saves counted, start on 0
-var goalCounter = 0;//amount of goals counted, start on 0
-var currentShotCount = 1;//current shot for counter, start on 1
-var totalShots = 3;//total amount of shots
-
+var saveCounter = 0; //amount of saves counted, start on 0
+var goalCounter = 0; //amount of goals counted, start on 0
+var currentShotCount = 1; //current shot for counter, start on 1
+var totalShots = 3; //total amount of shots
 
 
 function startGame(){
@@ -24,6 +23,9 @@ function startGame(){
     btnReplay.addEventListener("click", btnReplay_clickHandler, false);
     btnReplay.addEventListener("mouseover", btnReplay_overHandler, false);
     btnReplay.addEventListener("mouseout", btnReplay_outHandler, false);
+    TweenLite.killTweensOf(titleAnimation);
+    TweenLite.to(startText, 1, {opacity:0, delay:2.5});
+//    TweenLite.delayedCall(3, showShootOut);
     showShootOut();
 }
 
@@ -164,6 +166,7 @@ function btnReplay_outHandler(){
 function titleAnimation(){
     bounceBall();
     pulseSpaceBarText();
+    shakeLetters();
 }
 
 function bounceBall(){
@@ -171,8 +174,16 @@ function bounceBall(){
 }
 
 function pulseSpaceBarText(){
-    TweenLite.to(spaceBarTitle, 1.5, {scale:0.75, rotationZ:0.1});
-    TweenLite.to(spaceBarTitle, 1.5, {scale:1, delay:1.4, rotationZ:0.1, onComplete: pulseSpaceBarText});
+    TweenLite.to(spaceBarTitle, 1.5, {scale:0.75, ease:Sine.easeInOut});
+    TweenLite.to(spaceBarTitle, 1.5, {scale:1, ease:Sine.easeInOut, delay:1.4, onComplete: pulseSpaceBarText});
+}
+
+function shakeLetters(){
+    TweenLite.fromTo([phantomTitleP, phantomTitleH, phantomTitleA, phantomTitleN, phantomTitleT, phantomTitleM], 1.5, {x:-1}, {x:1, ease:RoughEase.ease.config({strength:16, points:30, template:Linear.easeNone, randomize:false}) , clearProps:"x", delay:0.9, onComplete:shakeTitle});
+}
+
+function shakeTitle(){
+    TweenLite.fromTo(phantomTitle, 1.5, {x:-1}, {x:1, ease:RoughEase.ease.config({strength:16, points:30, template:Linear.easeNone, randomize:false}) , clearProps:"x", delay:4, onComplete:shakeTitle});
 }
 
 titleAnimation();
