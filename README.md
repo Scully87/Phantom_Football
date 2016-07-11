@@ -33,7 +33,7 @@ Open command line
 
 Clone the repository:
 ```shell
-$ git clone git@github.com:Scully87/Phantom_Football.git
+$ git clone https://github.com/Scully87/Phantom_Football.git
 ```
 
 Change into the directory:
