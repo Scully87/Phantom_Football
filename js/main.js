@@ -25,13 +25,13 @@ function startGame(){
     btnReplay.addEventListener("mouseout", btnReplay_outHandler, false);
     TweenLite.killTweensOf(titleAnimation);
     TweenLite.to(startText, 0.5, {opacity:0, delay:2.5});
-//    TweenLite.delayedCall(3, showShootOut);
     showShootOut();
 }
 
 function showShootOut() {
     //reset location of elements after each shot
     TweenLite.set([ball,ballShadow,goalie], {y:0, x:0});
+    goaliePos = 0;
     btnReplay.style.display = "none";
     gameText.innerHTML = 'READY';
     shoot();
@@ -42,7 +42,7 @@ function shoot(){
 
     shotDelay = 3 + Math.random(3); //calculate a random delay before the kick
 
-    shotTime = 1; //currently the shot time is 1 second, but can add a random component to this
+    shotTime = 1.5; //currently the shot time is 1 second, but can add a random component to this
     ballTarget = -100 + (Math.random()*200); //calculates a horizontal ball target between -100 and +100 of the start position
 
     shotAngle = (-1 * ballTarget) / 250; //calculate a rough shot offset ratio we can use for the rebound if the goalie catches it
@@ -58,7 +58,7 @@ function ballPos(whichObj){
     //if the ball has reached the goalie
     if(whichObj._gsTransform.y > 135){
         //and if the ball horizontal position is within the goalie reach
-        if(whichObj._gsTransform.y < 145 && whichObj._gsTransform.x > goaliePos - 20 && whichObj._gsTransform.x < goaliePos + 20){
+        if(whichObj._gsTransform.y < 150 && whichObj._gsTransform.x > goaliePos - 20 && whichObj._gsTransform.x < goaliePos + 20){
             //it's been saved, so kill the kick tween on the ball and shadow, and fire a rebound
             console.log('SAVED!!!');
             gameText.innerHTML = 'SAVED!!!';
