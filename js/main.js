@@ -24,7 +24,7 @@ function startGame(){
     btnReplay.addEventListener("mouseover", btnReplay_overHandler, false);
     btnReplay.addEventListener("mouseout", btnReplay_outHandler, false);
     TweenLite.killTweensOf(titleAnimation);
-    TweenLite.to(startText, 1, {opacity:0, delay:2.5});
+    TweenLite.to(startText, 0.5, {opacity:0, delay:2.5});
 //    TweenLite.delayedCall(3, showShootOut);
     showShootOut();
 }
